@@ -293,10 +293,12 @@ document.getElementById('value-props').append(...valueProps.map(v => el(`
 /* ---------- Render: audience cards ---------- */
 document.getElementById('audience-cards').append(...audiences.map(a => el(`
   <div class="rounded-2xl border border-charcoal/10 bg-white p-8">
-    <div class="flex h-12 w-12 items-center justify-center rounded-xl ${a.iconBg}">
-      <i data-lucide="${a.icon}" class="text-white"></i>
+    <div class="flex flex-col items-center text-center">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl ${a.iconBg}">
+        <i data-lucide="${a.icon}" class="text-white"></i>
+      </div>
+      <h3 class="mt-5 font-semibold text-charcoal">${a.title}</h3>
     </div>
-    <h3 class="mt-5 font-semibold text-charcoal">${a.title}</h3>
     <ul class="mt-5 space-y-3">
       ${a.items.map(item => `
         <li class="flex items-start gap-2.5 text-sm text-charcoal/70">
