@@ -52,7 +52,7 @@
 <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-transparent bg-transparent">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
     <a href="/" class="flex items-center gap-3">
-      <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
         <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
           <path d="M60 60 C 40 55, 30 40, 32 20"/>
@@ -62,7 +62,8 @@
           <path d="M60 140 C 40 136, 30 122, 32 104"/>
           <path d="M60 140 C 80 136, 90 122, 88 104"/>
         </g>
-      </svg>
+      </svg> -->
+      <img src="/logo.png" alt="Logo AgrInvest" className="h-8 w-auto"/>
       <h3 id="brand-text" class="text-lg md:text-xl font-display transition-colors text-sand-100">AgrInvest</h3>
     </a>
 
@@ -247,11 +248,16 @@ const steps = [
 ];
 
 const heroSlides = [
+  "public/hero/img-1.jpeg",
   "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop",
+  "public/hero/img-2.jpg",
   "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1600&auto=format&fit=crop",
+  "public/hero/img-3.jpg",
   "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1600&auto=format&fit=crop",
+  "public/hero/img-4.jpg",
   "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop",
-];
+  "public/hero/img-5.jpg",
+  ];
 
 /* ---------- Render: hero ---------- */
 document.getElementById('stats').append(...localImpactStats.map(s => el(`
