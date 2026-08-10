@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgrInvest — Investissement agricole participatif</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --sand-100:#F6F1E4; --sand-200:#EDE3CC;
+    --olive-900:#2B3423; --olive-700:#495A34;
+    --terracotta-500:#C1622D; --terracotta-600:#A34F22;
+    --charcoal:#26241E;
+  }
+  html{scroll-behavior:smooth; scroll-padding-top:5rem;}
+  body{font-family:'Manrope',sans-serif;background:var(--sand-100);color:var(--charcoal);}
+  .font-display{font-family:'Newsreader',serif;}
+  .bg-sand-100{background-color:var(--sand-100);} .bg-sand-200{background-color:var(--sand-200);}
+  .bg-olive-900{background-color:var(--olive-900);} .bg-olive-700{background-color:var(--olive-700);}
+  .text-olive-700{color:var(--olive-700);} .text-olive-900{color:var(--olive-900);} .text-charcoal{color:var(--charcoal);}
+  .text-sand-100{color:var(--sand-100);} .text-terracotta-500{color:var(--terracotta-500);}
+  .bg-terracotta-500{background-color:var(--terracotta-500);}
+  .bg-terracotta-500:hover{background-color:var(--terracotta-600);}
+  .border-charcoal\/10{border-color:rgba(38,36,30,.10);} .border-charcoal\/15{border-color:rgba(38,36,30,.15);} .border-charcoal\/20{border-color:rgba(38,36,30,.20);}
+  .border-sand-100\/15{border-color:rgba(246,241,228,.15);} .border-sand-100\/30{border-color:rgba(246,241,228,.30);}
+  .border-sand-100\/30:hover{border-color:rgba(246,241,228,.6);}
+  .text-sand-100\/70{color:rgba(246,241,228,.70);} .text-sand-100\/80{color:rgba(246,241,228,.80);} .text-sand-100\/85{color:rgba(246,241,228,.85);}
+  .bg-olive-900\/70{background-color:rgba(43,52,35,.70);}
+  .bg-zellige{
+    background-image:
+      linear-gradient(135deg, rgba(193,98,45,.05) 25%, transparent 25%),
+      linear-gradient(225deg, rgba(193,98,45,.05) 25%, transparent 25%),
+      linear-gradient(45deg, rgba(193,98,45,.05) 25%, transparent 25%),
+      linear-gradient(315deg, rgba(193,98,45,.05) 25%, #fff 25%);
+    background-position: 20px 0, 20px 0, 0 0, 0 0;
+    background-size: 20px 20px; background-repeat: repeat;
+  }
+  details > summary{list-style:none; cursor:pointer;}
+  details > summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(180deg);}
+  .progress-track{background:rgba(38,36,30,.08);}
+  [data-lucide]{width:20px;height:20px;}
+</style>
+</head>
+<body class="bg-sand-100 text-charcoal">
+
+<!-- Navbar -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-transparent bg-transparent">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
+    <a href="/" class="flex items-center gap-3">
+      <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+        <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
+          <path d="M60 60 C 40 55, 30 40, 32 20"/>
+          <path d="M60 60 C 80 55, 90 40, 88 20"/>
+          <path d="M60 100 C 38 96, 26 80, 28 60"/>
+          <path d="M60 100 C 82 96, 94 80, 92 60"/>
+          <path d="M60 140 C 40 136, 30 122, 32 104"/>
+          <path d="M60 140 C 80 136, 90 122, 88 104"/>
+        </g>
+      </svg>
+      <h3 id="brand-text" class="text-lg md:text-xl font-display transition-colors text-sand-100">AgrInvest</h3>
+    </a>
+
+    <div class="hidden items-center gap-6 text-sm md:flex" id="nav-links">
+      <a href="#impact" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Impact Local</a>
+      <a href="#comment-ca-marche" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Comment ça marche</a>
+      <a href="#projects" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Projets</a>
+      <a href="#agriculteurs" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Pour les Agriculteurs</a>
+    </div>
+
+    <div class="flex items-center gap-4 text-sm">
+      <div class="relative">
+        <button id="lang-btn" class="lang-btn rounded-full border px-3 py-1.5 transition-colors border-sand-100/30 text-sand-100/85 hover:border-sand-100/60">FR</button>
+        <ul id="lang-list" class="hidden absolute right-0 mt-1 w-20 overflow-hidden rounded-lg border border-charcoal/10 bg-white shadow-sm">
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">FR</button></li>
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">AR</button></li>
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">EN</button></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Se connecter</a>
+      <a href="#register" class="rounded-full bg-terracotta-500 px-4 py-2 font-medium text-white hover:bg-terracotta-600 transition-colors">Investir dès 1 000 DH</a>
+    </div>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="relative overflow-hidden text-sand-100">
+  <div class="absolute inset-0 z-0" id="slideshow"></div>
+  <div class="absolute inset-0 z-[1] bg-olive-900/70"></div>
+
+  <div class="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center md:py-28">
+    <h1 class="font-display text-4xl leading-tight md:text-5xl">
+      Investissez dans la terre marocaine.
+      <br>
+      <em class="text-terracotta-500" style="font-style:italic;">Développez notre agriculture, récoltez des revenus réguliers.</em>
+    </h1>
+    <p class="mx-auto mt-6 max-w-lg text-lg text-sand-100/85">
+      Investissement agricole participatif à partir de 1 000 DH.
+      Soutenez les agriculteurs locaux, financez l'irrigation
+      goutte-à-goutte et le solaire, et percevez des rendements
+      locatifs trimestriels.
+    </p>
+
+    <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <a href="#projects" class="rounded-full bg-terracotta-500 px-6 py-3 font-medium text-white hover:bg-terracotta-600 transition-colors">Voir les projets disponibles</a>
+      <a href="#register" class="rounded-full border border-sand-100/30 px-6 py-3 font-medium hover:border-sand-100/60 transition-colors">Déposer un projet (Agriculteurs)</a>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-sand-100/15 pt-8" id="stats"></div>
+  </div>
+
+  <div class="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2" id="slide-dots"></div>
+</section>
+
+<!-- Value proposition grid -->
+<section id="impact" class="mx-auto max-w-6xl px-6 py-20">
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-4" id="value-props"></div>
+</section>
+
+<!-- Pour qui / Audience section -->
+<section id="agriculteurs" class="mx-auto max-w-6xl px-6 py-20">
+  <div class="mx-auto max-w-2xl text-center">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-olive-700">Pour qui ?</p>
+    <h2 class="mt-3 font-display text-3xl text-charcoal md:text-4xl">Une plateforme pour tous les acteurs agricoles</h2>
+    <p class="mt-4 text-charcoal/60">Que vous soyez agriculteur, investisseur ou professionnel de l'assurance, AgrInvest met les bons outils à votre disposition.</p>
+  </div>
+  <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3" id="audience-cards"></div>
+</section>
+
+<!-- Featured projects -->
+<section id="projects" class="bg-sand-200 py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="font-display text-3xl text-charcoal">Projets Agricoles Ouverts à l'Investissement</h2>
+    <div class="mt-6 flex flex-wrap gap-2" id="filter-tags"></div>
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3" id="project-cards"></div>
+  </div>
+</section>
+
+<!-- Fonctionnalités -->
+<section class="bg-sand-100 py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-olive-700">Fonctionnalités</p>
+      <h2 class="mt-3 font-display text-3xl text-charcoal md:text-4xl">Tout ce dont vous avez besoin</h2>
+      <p class="mt-4 text-charcoal/60">Des outils complets pour tous les acteurs de l'écosystème agricole marocain.</p>
+    </div>
+    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" id="feature-cards"></div>
+  </div>
+</section>
+
+<!-- Comment ça marche -->
+<section id="comment-ca-marche" class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-olive-700">Comment ça marche</p>
+      <h2 class="mt-3 font-display text-3xl text-charcoal md:text-4xl">Démarrez en 3 étapes</h2>
+    </div>
+    <div class="relative mt-16 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+      <div class="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-charcoal/15 md:block"></div>
+      <div id="steps"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust & legal compliance -->
+<section class="bg-olive-900 text-sand-100">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="font-display text-2xl">Garanties &amp; Sécurité</h2>
+    <p class="mt-3 max-w-2xl text-sand-100/80">
+      Nos baux agricoles s'appuient sur les cadres juridiques
+      marocains (Melk, Habous, ou baux agricoles), un chiffrement de
+      niveau bancaire, et des comptes séquestres locaux.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-sand-100/15 pt-8 text-sm text-sand-100/70" id="trust-partners"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="register" class="mx-auto max-w-3xl px-6 py-20">
+  <h2 class="font-display text-3xl text-charcoal">Questions fréquentes</h2>
+  <div class="mt-8 divide-y divide-charcoal/10 border-t border-b border-charcoal/10" id="faq-list"></div>
+</section>
+
+<footer class="border-t border-charcoal/10 py-10">
+  <div class="mx-auto max-w-6xl px-6 text-sm text-charcoal/60 flex flex-wrap justify-between gap-4">
+    <span class="font-display text-base text-charcoal">AgrInvest</span>
+    <span>© 2026 AgrInvest. Plateforme de financement participatif agricole.</span>
+  </div>
+</footer>
+
+<script>
+function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+
+/* ---------- Data ---------- */
+const localImpactStats = [
+  { value: "12,000+", label: "Hectares Revalorisés" },
+  { value: "100%", label: "Contrats de Bail Sécurisés" },
+  { value: "5%–8%", label: "Rendement Cible Annuel" },
+];
+
+const valueProps = [
+  { title: "Accessible à tous", body: "Investissez dès 1 000 MAD dans des terres agricoles à haut rendement, partout au Maroc." },
+  { title: "Rendements Réguliers", body: "Percevez 5 à 8 % de rendement annuel via les récoltes et baux agricoles, versés directement sur votre compte CIH, Attijari ou BMCE." },
+  { title: "Impact Social", body: "Aidez les petits exploitants à passer au goutte-à-goutte, au pompage solaire et aux certifications biologiques." },
+  { title: "Souveraineté Alimentaire", body: "Protégez les ressources en eau du pays et renforcez la sécurité alimentaire locale à travers le Maroc." },
+];
+
+const filterTags = ["Tous", "Oliviers (Souss-Massa)", "Dattiers (Draa-Tafilalet)", "Agrumes (Saïss)", "Coopératives Féminines"];
+
+const featuredProjects = [
+  { title: "Oasis de Dattes Majhoul", region: "Errachidia", tag: "Dattiers (Draa-Tafilalet)", min: "1 000 DH", yieldPct: "7,2%", target: "850 000 DH", funded: 75, impact: "Installation de 120 panneaux solaires et pompage photovoltaïque." },
+  { title: "Oliveraie Bio & Huile d'Olive", region: "Meknès", tag: "Oliviers (Souss-Massa)", min: "2 000 DH", yieldPct: "6,5%", target: "1 200 000 DH", funded: 40, impact: "Transition vers la certification Bio et goutte-à-goutte intelligent." },
+  { title: "Agrumes & Maraîchage Durand", region: "Agadir", tag: "Agrumes (Saïss)", min: "1 000 DH", yieldPct: "5,8%", target: "500 000 DH", funded: 90, impact: "Modernisation des serres et soutien à une jeune coopérative locale." },
+];
+
+const trustPartners = ["Crédit Agricole du Maroc", "ADA — Agence pour le Développement Agricole", "Green March Initiative", "Incubateurs agritech locaux"];
+
+const faqItems = [
+  { q: "Quel est le montant minimum pour investir ?", a: "1 000 DH." },
+  { q: "Comment les revenus sont-ils versés au Maroc ?", a: "Par virement bancaire direct sur votre compte marocain." },
+  { q: "Comment garantissez-vous la gestion de l'eau face à la sécheresse ?", a: "100 % des projets doivent être équipés d'un système goutte-à-goutte et de bassins de rétention." },
+  { q: "Je suis un agriculteur, comment puis-je proposer mes terres ?", a: "Créez un compte agriculteur et déposez votre projet en 5 minutes depuis votre tableau de bord." },
+];
+
+const audiences = [
+  { title: "Agriculteurs", icon: "sprout", iconBg: "bg-emerald-500", items: ["Recommandations cultures par IA", "Gestion de l'exploitation", "Analyse eau et budget saisonnier", "Carte de localisation interactive"] },
+  { title: "Investisseurs", icon: "bar-chart-3", iconBg: "bg-blue-500", items: ["Parcourir les projets agricoles", "Scoring de risque IA", "Analyse du retour sur investissement", "Contact direct avec les agriculteurs"] },
+  { title: "Assurances", icon: "shield-check", iconBg: "bg-purple-500", items: ["Données terrain et cultures", "Évaluation risques climat et irrigation", "Profil agriculteurs et expériences", "Opportunités d'assurance agricole"] },
+];
+
+const features = [
+  { title: "Recommandations IA", tag: "Agriculteur", tagBg: "bg-emerald-100", tagText: "text-emerald-700", icon: "sprout", iconBg: "bg-emerald-500", body: "Top 3 cultures selon votre région, eau et budget saisonnier." },
+  { title: "Score de risque", tag: "Investisseur", tagBg: "bg-blue-100", tagText: "text-blue-700", icon: "bar-chart-3", iconBg: "bg-blue-500", body: "Analyse détaillée de chaque projet agricole avant toute décision d'investissement." },
+  { title: "Analyse assurantielle", tag: "Assurance", tagBg: "bg-purple-100", tagText: "text-purple-700", icon: "shield-check", iconBg: "bg-purple-500", body: "Données terrain et cultures pour évaluer les risques et opportunités d'assurance agricole." },
+  { title: "Prix du marché", tag: "Temps réel", tagBg: "bg-orange-100", tagText: "text-orange-700", icon: "trending-up", iconBg: "bg-orange-500", body: "Données de prix et rendements du marché marocain 2024-2025." },
+];
+
+const steps = [
+  { number: "01", title: "Créez un compte", body: "Inscrivez-vous gratuitement en tant qu'agriculteur, investisseur ou assureur.", icon: "users" },
+  { number: "02", title: "Saisissez vos données", body: "Votre région, type d'irrigation, superficie et budget saisonnier.", icon: "map-pin" },
+  { number: "03", title: "Résultats IA instantanés", body: "Recommandations agricoles, scoring de risque ou analyse assurantielle en quelques secondes.", icon: "zap" },
+];
+
+const heroSlides = [
+  "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop",
+];
+
+/* ---------- Render: hero ---------- */
+document.getElementById('stats').append(...localImpactStats.map(s => el(`
+  <div>
+    <p class="font-display text-2xl text-terracotta-500">${s.value}</p>
+    <p class="mt-1 text-xs text-sand-100/70">${s.label}</p>
+  </div>`)));
+
+const slideshow = document.getElementById('slideshow');
+const dotsWrap = document.getElementById('slide-dots');
+let current = 0;
+heroSlides.forEach((src, i) => {
+  slideshow.append(el(`<img src="${src}" alt="" class="slide absolute inset-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out ${i===0 ? 'opacity-100':'opacity-0'}">`));
+  dotsWrap.append(el(`<span class="dot h-1.5 rounded-full transition-all ${i===0 ? 'w-6 bg-terracotta-500':'w-1.5 bg-sand-100/40'}"></span>`));
+});
+setInterval(() => {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  slides[current].classList.replace('opacity-100','opacity-0');
+  dots[current].classList.remove('w-6','bg-terracotta-500'); dots[current].classList.add('w-1.5','bg-sand-100/40');
+  current = (current + 1) % heroSlides.length;
+  slides[current].classList.replace('opacity-0','opacity-100');
+  dots[current].classList.remove('w-1.5','bg-sand-100/40'); dots[current].classList.add('w-6','bg-terracotta-500');
+}, 5000);
+
+/* ---------- Render: value props ---------- */
+document.getElementById('value-props').append(...valueProps.map(v => el(`
+  <div class="bg-zellige rounded-2xl border border-charcoal/10 bg-white p-6">
+    <h3 class="font-display text-lg text-olive-700">${v.title}</h3>
+    <p class="mt-2 text-sm text-charcoal/70">${v.body}</p>
+  </div>`)));
+
+/* ---------- Render: audience cards ---------- */
+document.getElementById('audience-cards').append(...audiences.map(a => el(`
+  <div class="rounded-2xl border border-charcoal/10 bg-white p-8">
+    <div class="flex h-12 w-12 items-center justify-center rounded-xl ${a.iconBg}">
+      <i data-lucide="${a.icon}" class="text-white"></i>
+    </div>
+    <h3 class="mt-5 font-semibold text-charcoal">${a.title}</h3>
+    <ul class="mt-5 space-y-3">
+      ${a.items.map(item => `
+        <li class="flex items-start gap-2.5 text-sm text-charcoal/70">
+          <i data-lucide="check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"></i>
+          <span>${item}</span>
+        </li>`).join('')}
+    </ul>
+  </div>`)));
+
+/* ---------- Render: filter tags & project cards ---------- */
+document.getElementById('filter-tags').append(...filterTags.map((tag,i) => el(`
+  <span class="rounded-full px-4 py-1.5 text-sm ${i===0 ? 'bg-olive-700 text-white' : 'border border-charcoal/15 text-charcoal/70'}">${tag}</span>`)));
+
+document.getElementById('project-cards').append(...featuredProjects.map(p => el(`
+  <div class="rounded-2xl border border-charcoal/10 bg-white overflow-hidden">
+    <div class="h-36 bg-olive-700 flex items-end p-4">
+      <span class="rounded-full bg-sand-100 px-3 py-1 text-xs font-medium text-olive-700">${p.tag}</span>
+    </div>
+    <div class="p-5">
+      <h3 class="font-display text-lg text-charcoal">${p.title}</h3>
+      <p class="mt-1 text-sm text-charcoal/60">${p.region}</p>
+      <p class="mt-2 text-sm text-charcoal/70">${p.impact}</p>
+      <div class="mt-4 h-2 rounded-full progress-track overflow-hidden">
+        <div class="h-full bg-terracotta-500" style="width:${p.funded}%"></div>
+      </div>
+      <p class="mt-2 text-xs text-charcoal/60">${p.funded}% financé · Objectif ${p.target}</p>
+      <div class="mt-4 grid grid-cols-3 gap-2 border-t border-charcoal/10 pt-4 text-center">
+        <div><p class="font-display text-sm text-olive-700">${p.yieldPct}</p><p class="text-[11px] text-charcoal/60">Rendement</p></div>
+        <div><p class="font-display text-sm text-olive-700">-</p><p class="text-[11px] text-charcoal/60">Durée</p></div>
+        <div><p class="font-display text-sm text-olive-700">${p.min}</p><p class="text-[11px] text-charcoal/60">Ticket min.</p></div>
+      </div>
+      <button class="mt-5 w-full rounded-full bg-terracotta-500 py-2.5 text-sm font-medium text-white hover:bg-terracotta-600 transition-colors">Investir dans ce projet</button>
+    </div>
+  </div>`)));
+
+/* ---------- Render: feature cards ---------- */
+document.getElementById('feature-cards').append(...features.map(f => el(`
+  <div class="rounded-2xl border border-charcoal/10 bg-white p-6">
+    <div class="flex h-11 w-11 items-center justify-center rounded-xl ${f.iconBg}">
+      <i data-lucide="${f.icon}" class="text-white"></i>
+    </div>
+    <div class="mt-5 flex flex-wrap items-center gap-2">
+      <h3 class="font-semibold text-charcoal">${f.title}</h3>
+      <span class="rounded-full px-2.5 py-0.5 text-xs font-medium ${f.tagBg} ${f.tagText}">${f.tag}</span>
+    </div>
+    <p class="mt-3 text-sm text-charcoal/60">${f.body}</p>
+  </div>`)));
+
+/* ---------- Render: steps ---------- */
+const stepsWrap = document.getElementById('steps');
+stepsWrap.replaceWith(el(`<div class="contents">${steps.map(s => `
+  <div class="relative text-center md:text-left">
+    <div class="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-olive-700 md:mx-0">
+      <i data-lucide="${s.icon}" class="text-white"></i>
+    </div>
+    <p class="mt-5 flex items-center justify-center gap-2 md:justify-start">
+      <span class="text-xs font-semibold text-charcoal/40">${s.number}</span>
+      <span class="font-semibold text-charcoal">${s.title}</span>
+    </p>
+    <p class="mx-auto mt-2 max-w-xs text-sm text-charcoal/60 md:mx-0">${s.body}</p>
+  </div>`).join('')}</div>`));
+
+/* ---------- Render: trust partners ---------- */
+document.getElementById('trust-partners').append(...trustPartners.map(t => el(`<span>${t}</span>`)));
+
+/* ---------- Render: FAQ ---------- */
+document.getElementById('faq-list').append(...faqItems.map(f => el(`
+  <details class="py-4">
+    <summary class="flex items-center justify-between gap-4 font-medium text-charcoal">
+      ${f.q}
+      <svg class="chev h-4 w-4 shrink-0 text-charcoal/50 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <p class="mt-3 text-sm text-charcoal/70">${f.a}</p>
+  </details>`)));
+
+/* ---------- Navbar scroll behavior ---------- */
+const header = document.getElementById('navbar');
+const brand = document.getElementById('brand-text');
+const navLinkEls = document.querySelectorAll('.nav-link');
+const langBtn = document.getElementById('lang-btn');
+
+function setScrolled(scrolled){
+  if(scrolled){
+    header.classList.remove('border-transparent','bg-transparent');
+    header.classList.add('border-b','border-charcoal/10','bg-sand-100/95','backdrop-blur');
+    brand.classList.remove('text-sand-100'); brand.classList.add('text-olive-900');
+    navLinkEls.forEach(l => { l.classList.remove('text-sand-100/85','hover:text-sand-100'); l.classList.add('text-charcoal/80','hover:text-olive-700'); });
+    langBtn.classList.remove('border-sand-100/30','text-sand-100/85','hover:border-sand-100/60');
+    langBtn.classList.add('border-charcoal/15','text-charcoal/80','hover:border-charcoal/30');
+  } else {
+    header.classList.add('border-transparent','bg-transparent');
+    header.classList.remove('border-b','border-charcoal/10','bg-sand-100/95','backdrop-blur');
+    brand.classList.add('text-sand-100'); brand.classList.remove('text-olive-900');
+    navLinkEls.forEach(l => { l.classList.add('text-sand-100/85','hover:text-sand-100'); l.classList.remove('text-charcoal/80','hover:text-olive-700'); });
+    langBtn.classList.add('border-sand-100/30','text-sand-100/85','hover:border-sand-100/60');
+    langBtn.classList.remove('border-charcoal/15','text-charcoal/80','hover:border-charcoal/30');
+  }
+}
+window.addEventListener('scroll', () => setScrolled(window.scrollY > 10));
+
+/* ---------- Language dropdown ---------- */
+const langList = document.getElementById('lang-list');
+langBtn.addEventListener('click', () => langList.classList.toggle('hidden'));
+document.querySelectorAll('.lang-opt').forEach(btn => {
+  btn.addEventListener('click', () => { langBtn.textContent = btn.textContent; langList.classList.add('hidden'); });
+});
+
+/* ---------- Render icons ---------- */
+lucide.createIcons();
+</script>
+</body>
+</html>
