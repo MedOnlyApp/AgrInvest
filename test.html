@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment ça marche — AgrInvest</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --forest-950:#0F241A; --forest-900:#142B20; --forest-800:#1B3A2B; --forest-700:#234A36; --forest-500:#3A6B4E;
+    --gold-300:#E8CE8E; --gold-500:#C9A24B; --gold-600:#AD873A;
+    --parchment-100:#FBF8F0; --parchment-200:#F6F1E2; --parchment-300:#EEE6CE;
+    --ink:#182620; --clay:#B9563F; --sage:#6E9A79;
+    --terracotta-500:#C85A32; --terracotta-600:#B04A26;
+    --olive-900:#1F3D1B; --olive-700:#2D5A27; --olive-500:#3E7A37;
+    --sand-100:#FAF7F2; --sand-200:#F3EDE1;
+    --grass-100:#b8ffc6b0; --grass-200:#a5e2b19e; --grass-500:#6EA579;
+    --charcoal:#2B2622;
+  }
+  html{scroll-behavior:smooth; scroll-padding-top:5rem;}
+  body{font-family:'Manrope',sans-serif;background:var(--parchment-100);color:var(--charcoal);}
+  .font-display{font-family:'Newsreader',serif;}
+
+  .bg-forest-900{background-color:var(--forest-900);} .bg-forest-800{background-color:var(--forest-800);}
+  .text-sand-100{color:var(--sand-100);} .text-sand-100\/85{color:rgba(250,247,242,.85);} .text-sand-100\/70{color:rgba(250,247,242,.70);}
+  .bg-sand-100{background-color:var(--sand-100);} .bg-sand-200{background-color:var(--sand-200);}
+
+  .text-olive-700{color:var(--olive-700);} .text-olive-500{color:var(--olive-500);} .text-olive-900{color:var(--olive-900);}
+  .bg-olive-700{background-color:var(--olive-700);} .bg-olive-500{background-color:var(--olive-500);} .bg-olive-900{background-color:var(--olive-900);}
+  .border-olive-500{border-color:var(--olive-500);} .border-olive-700\/30{border-color:rgba(45,90,39,.3);}
+
+  .text-charcoal{color:var(--charcoal);} .bg-charcoal\/70{background-color:rgba(43,38,34,.70);}
+  .border-charcoal\/10{border-color:rgba(43,38,34,.10);} .border-charcoal\/15{border-color:rgba(43,38,34,.15);} .border-charcoal\/20{border-color:rgba(43,38,34,.20);}
+  .text-charcoal\/70{color:rgba(43,38,34,.70);} .text-charcoal\/60{color:rgba(43,38,34,.60);} .divide-charcoal\/10 > * + *{border-color:rgba(43,38,34,.10);}
+
+  .text-terracotta-500{color:var(--terracotta-500);}
+  .bg-terracotta-500{background-color:var(--terracotta-500);}
+  .bg-terracotta-500:hover{background-color:var(--terracotta-600);}
+
+  .bg-grass-500{background-color:var(--grass-500);} .bg-grass-500\/80{background-color:rgba(110,165,121,.8);}
+  .bg-grass-200{background-color:var(--grass-200);}
+
+  .bg-field{ background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1920&auto=format&fit=crop'); }
+  .bg-zellige{
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%232B2622' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M20 2 L38 20 L20 38 L2 20 Z'/%3E%3Cpath d='M20 10 L30 20 L20 30 L10 20 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  details > summary{list-style:none; cursor:pointer;}
+  details > summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(180deg);}
+  [data-lucide]{width:22px;height:22px;}
+</style>
+</head>
+<body class="bg-parchment-100 text-charcoal" style="background-color:var(--parchment-100);">
+
+<!-- Navbar -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-transparent bg-white">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
+    <a href="#" class="flex items-center gap-3">
+      <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+        <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
+          <path d="M60 60 C 40 55, 30 40, 32 20"/>
+          <path d="M60 60 C 80 55, 90 40, 88 20"/>
+          <path d="M60 100 C 38 96, 26 80, 28 60"/>
+          <path d="M60 100 C 82 96, 94 80, 92 60"/>
+          <path d="M60 140 C 40 136, 30 122, 32 104"/>
+          <path d="M60 140 C 80 136, 90 122, 88 104"/>
+        </g>
+      </svg>
+      <h3 id="brand-text" class="text-lg md:text-xl font-display transition-colors text-charcoal">AgrInvest</h3>
+    </a>
+
+    <div class="hidden items-center gap-6 text-sm text-black md:flex" id="nav-links">
+      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Impact Local</a>
+      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Comment ça marche</a>
+      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Projets</a>
+      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Pour les Agriculteurs</a>
+    </div>
+
+    <div class="flex items-center gap-4 text-sm">
+      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Se connecter</a>
+      <a href="#" class="rounded-full bg-terracotta-500 px-4 py-2 font-medium text-white hover:bg-terracotta-600 transition-colors">Investir dès 1 000 DH</a>
+    </div>
+  </nav>
+</header>
+
+<div class="text-charcoal">
+
+  <!-- Section 1 — Statement + image -->
+  <section class="mx-auto max-w-6xl px-6 pb-20 pt-32">
+    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-olive-700">Comment ça marche</p>
+        <h1 class="mt-3 text-4xl font-bold text-olive-500 md:text-5xl">
+          Investir dans l'agriculture marocaine, simplement.
+        </h1>
+        <p class="mt-5 text-charcoal/70">
+          Investir sur AgrInvest, c'est rejoindre l'écosystème
+          agroalimentaire marocain — aux côtés des agriculteurs, des
+          coopératives et des acteurs qui font vivre la terre, avec un
+          rendement à la clé.
+        </p>
+      </div>
+
+      <div class="relative h-72 overflow-hidden rounded-2xl md:h-96">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1200&auto=format&fit=crop" alt="Ferme marocaine" class="absolute inset-0 h-full w-full object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 — statement banner -->
+  <section class="relative bg-field bg-cover bg-center">
+    <div class="absolute inset-0 bg-charcoal/70"></div>
+    <div class="relative z-10 flex min-h-[420px] items-center justify-center px-6 py-20">
+      <p class="max-w-2xl text-center text-2xl font-bold text-white/90">
+        AgrInvest connecte directement les investisseurs aux
+        agriculteurs marocains. Chaque projet est évalué par notre
+        moteur de scoring IA, et chaque investissement contribue
+        concrètement à la modernisation de l'agriculture locale —
+        tout en générant un revenu pour vous.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3 — Investor / AgrInvest / Farmer schema -->
+  <section class="bg-zellige bg-white py-20">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="flex justify-center">
+        <span class="inline-block rounded-lg border-2 border-olive-500 px-6 py-2 text-sm font-bold uppercase tracking-wide bg-olive-500 text-white">
+          Notre modèle
+        </span>
+      </div>
+
+      <div class="mt-16">
+        <!-- Desktop / tablet — arc diagram -->
+        <div class="relative mx-auto hidden w-full max-w-4xl md:block" style="aspect-ratio:1000/420;">
+          <svg viewBox="0 0 1000 420" class="absolute inset-0 h-full w-full" fill="none">
+            <defs>
+              <marker id="arrow-grass" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#6EA579" />
+              </marker>
+              <marker id="arrow-olive" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#2D5A27" />
+              </marker>
+              <marker id="arrow-dashed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#2D5A2799" />
+              </marker>
+            </defs>
+
+            <path d="M 170 130 Q 320 20 460 120" stroke="#6EA579" stroke-width="3" marker-end="url(#arrow-grass)" />
+            <path d="M 460 190 Q 320 300 170 190" stroke="#6EA579" stroke-width="3" marker-end="url(#arrow-grass)" />
+            <path d="M 540 120 Q 680 20 830 130" stroke="#2D5A27" stroke-width="3" marker-end="url(#arrow-olive)" />
+            <path d="M 830 190 Q 680 300 540 190" stroke="#2D5A27" stroke-width="3" marker-end="url(#arrow-olive)" />
+            <path d="M 150 215 Q 500 390 850 215" stroke="#2D5A2799" stroke-width="2" stroke-dasharray="6 6" marker-start="url(#arrow-dashed)" marker-end="url(#arrow-dashed)" />
+          </svg>
+
+          <div style="left:13%; top:38%;" class="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-grass-500">
+              <i data-lucide="users" class="text-white"></i>
+            </div>
+            <p class="mt-2 font-semibold text-charcoal">Investisseur</p>
+          </div>
+
+          <div style="left:50%; top:36%;" class="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+            <div class="flex items-center justify-center gap-3">
+              <svg class="h-8 w-6 text-olive-700" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+                <g stroke="currentColor" stroke-width="6" stroke-linecap="round">
+                  <path d="M60 60 C 40 55, 30 40, 32 20"/>
+                  <path d="M60 60 C 80 55, 90 40, 88 20"/>
+                  <path d="M60 100 C 38 96, 26 80, 28 60"/>
+                  <path d="M60 100 C 82 96, 94 80, 92 60"/>
+                </g>
+              </svg>
+              <span class="font-display text-xl text-charcoal">AgrInvest</span>
+            </div>
+          </div>
+
+          <div style="left:87%; top:38%;" class="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-olive-700">
+              <i data-lucide="sprout" class="text-white"></i>
+            </div>
+            <p class="mt-2 font-semibold text-charcoal">Agriculteur</p>
+          </div>
+
+          <div style="left:30%; top:9%;" class="absolute w-40 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-grass-500 px-4 py-2 text-center text-sm font-medium text-white shadow-sm">
+            Investissement dès 1 000 MAD
+          </div>
+
+          <div style="left:30%; top:67%;" class="absolute w-40 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-grass-500/80 px-4 py-2 text-center text-sm font-medium text-white shadow-sm">
+            Partage des bénéfices
+          </div>
+
+          <div style="left:50%; top:88%;" class="absolute w-44 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-olive-700/30 bg-white px-4 py-2 text-center text-sm font-medium text-olive-700">
+            Suivi direct du projet
+          </div>
+        </div>
+
+        <!-- Mobile — simple vertical flow -->
+        <div class="mx-auto flex max-w-xs flex-col items-center gap-3 md:hidden">
+          <div class="flex flex-col items-center">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-grass-500">
+              <i data-lucide="users" class="text-white"></i>
+            </div>
+            <p class="mt-2 font-semibold text-charcoal">Investisseur</p>
+          </div>
+
+          <div class="h-6 w-px bg-charcoal/20"></div>
+          <div class="w-full rounded-lg bg-grass-500 px-4 py-2 text-center text-sm font-medium text-white shadow-sm">
+            Investissement dès 1 000 MAD
+          </div>
+          <div class="h-6 w-px bg-charcoal/20"></div>
+
+          <div class="flex items-center gap-2">
+            <svg class="h-8 w-6 text-olive-700" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+              <g stroke="currentColor" stroke-width="6" stroke-linecap="round">
+                <path d="M60 60 C 40 55, 30 40, 32 20"/>
+                <path d="M60 60 C 80 55, 90 40, 88 20"/>
+              </g>
+            </svg>
+            <span class="font-display text-xl text-charcoal">AgrInvest</span>
+          </div>
+
+          <div class="h-6 w-px bg-charcoal/20"></div>
+          <div class="w-full rounded-lg bg-grass-500/80 px-4 py-2 text-center text-sm font-medium text-white shadow-sm">
+            Partage des bénéfices
+          </div>
+          <div class="h-6 w-px bg-charcoal/20"></div>
+
+          <div class="flex flex-col items-center">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-olive-700">
+              <i data-lucide="sprout" class="text-white"></i>
+            </div>
+            <p class="mt-2 font-semibold text-charcoal">Agriculteur</p>
+          </div>
+
+          <div class="mt-4 w-full rounded-lg border border-olive-700/30 bg-white px-4 py-2 text-center text-sm font-medium text-olive-700">
+            Suivi direct du projet
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 — 4 steps to invest -->
+  <section class="bg-grass-200">
+    <div class="mx-auto max-w-6xl px-3 py-20">
+      <div class="flex justify-center">
+        <span class="inline-block rounded-lg border-2 border-olive-500 px-6 py-2 text-sm font-bold uppercase tracking-wide bg-olive-500 text-white">
+          Investir en 4 étapes
+        </span>
+      </div>
+
+      <div class="mt-16 space-y-16" id="invest-steps"></div>
+    </div>
+  </section>
+
+  <!-- Section 5 — Impact stats / CTA -->
+  <section class="relative overflow-hidden">
+    <div class="relative h-[480px] w-full md:h-[560px]">
+      <img src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1920&auto=format&fit=crop" alt="" class="absolute inset-0 h-full w-full object-cover">
+
+      <div class="absolute inset-0 flex items-center justify-center px-6 md:justify-end md:pr-16">
+        <div class="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl md:p-10">
+          <h2 class="font-display text-2xl text-olive-700 md:text-3xl">
+            Investissez pour l'avenir de notre alimentation
+          </h2>
+          <p class="mt-4 text-sm text-charcoal/70">
+            Derrière chaque investissement, il y a la promesse d'une
+            alimentation saine : une ferme qui se transmet, un sol qui
+            revit et un agriculteur qui regarde l'avenir sereinement.
+          </p>
+          <button class="mt-6 w-full rounded-full bg-terracotta-500 px-6 py-3 text-sm font-semibold text-white hover:bg-terracotta-600">
+            Se Connecter
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-sand-200 py-20">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-display text-3xl text-charcoal">Questions fréquentes</h2>
+      <div class="mt-8 divide-y divide-charcoal/10 border-t border-b border-charcoal/10" id="faq-list"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-forest-900 text-sand-100">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <svg class="h-6 w-6 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+            <g stroke="currentColor" stroke-width="6" stroke-linecap="round">
+              <path d="M60 60 C 40 55, 30 40, 32 20"/>
+              <path d="M60 60 C 80 55, 90 40, 88 20"/>
+            </g>
+          </svg>
+          <span class="font-display text-lg">AgrInvest</span>
+        </div>
+        <p class="mt-4 text-sm text-sand-100/70">
+          Investissement agricole participatif, au service des
+          agriculteurs et des investisseurs marocains.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wide text-sand-100/85">Plateforme</h4>
+        <ul class="mt-4 space-y-2 text-sm text-sand-100/70">
+          <li><a href="#" class="hover:text-sand-100">Comment ça marche</a></li>
+          <li><a href="#" class="hover:text-sand-100">Projets</a></li>
+          <li><a href="#" class="hover:text-sand-100">Pour les agriculteurs</a></li>
+          <li><a href="#" class="hover:text-sand-100">Tableau de bord</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wide text-sand-100/85">Ressources</h4>
+        <ul class="mt-4 space-y-2 text-sm text-sand-100/70">
+          <li><a href="#" class="hover:text-sand-100">FAQ</a></li>
+          <li><a href="#" class="hover:text-sand-100">Guide de l'investisseur</a></li>
+          <li><a href="#" class="hover:text-sand-100">Mentions légales</a></li>
+          <li><a href="#" class="hover:text-sand-100">Confidentialité</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wide text-sand-100/85">Contact</h4>
+        <ul class="mt-4 space-y-2 text-sm text-sand-100/70">
+          <li>contact@agrinvest.ma</li>
+          <li>+212 5 00 00 00 00</li>
+          <li>Casablanca, Maroc</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-sand-100/15 pt-8 text-sm text-sand-100/60 md:flex-row">
+      <span>© 2026 AgrInvest. Tous droits réservés.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-sand-100">Conditions d'utilisation</a>
+        <a href="#" class="hover:text-sand-100">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+
+/* ---------- Data ---------- */
+const investSteps = [
+  { number: "01", title: "Créez votre compte investisseur", body: "Inscrivez-vous en quelques minutes et vérifiez votre identité pour accéder aux projets disponibles.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop" },
+  { number: "02", title: "Explorez les projets agricoles", body: "Parcourez les fermes ouvertes au financement, consultez leur score de risque IA et leur rendement cible.", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop" },
+  { number: "03", title: "Investissez dès 1 000 MAD", body: "Choisissez le montant que vous souhaitez engager et confirmez votre investissement en toute sécurité.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" },
+  { number: "04", title: "Suivez votre investissement", body: "Recevez des mises à jour sur la récolte et percevez vos revenus directement sur votre compte bancaire.", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop" },
+];
+
+const investorFaqItems = [
+  { q: "Quel est le montant minimum pour investir ?", a: "1 000 MAD par projet." },
+  { q: "Comment sont calculés les rendements ?", a: "Ils dépendent des bénéfices réels de la récolte, partagés entre l'agriculteur et les investisseurs selon les conditions du projet." },
+  { q: "Puis-je investir dans plusieurs projets à la fois ?", a: "Oui, vous pouvez répartir votre capital sur autant de projets que vous le souhaitez." },
+  { q: "Que se passe-t-il si un projet n'atteint pas son objectif de financement ?", a: "Le projet reste ouvert jusqu'à l'atteinte de son objectif ou la clôture de la campagne, selon les conditions définies par l'agriculteur." },
+];
+
+/* ---------- Render: invest steps ---------- */
+document.getElementById('invest-steps').append(...investSteps.map((step, i) => el(`
+  <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 ${i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''}">
+    <div class="relative h-64 overflow-hidden rounded-2xl">
+      <img src="${step.image}" alt="${step.title}" class="absolute inset-0 h-full w-full object-cover">
+    </div>
+    <div>
+      <span class="font-display text-3xl text-terracotta-500">${step.number}</span>
+      <h3 class="mt-2 font-display text-2xl text-charcoal">${step.title}</h3>
+      <p class="mt-3 text-charcoal/70">${step.body}</p>
+    </div>
+  </div>`)));
+
+/* ---------- Render: FAQ ---------- */
+document.getElementById('faq-list').append(...investorFaqItems.map(f => el(`
+  <details class="py-4">
+    <summary class="flex items-center justify-between gap-4 font-medium text-charcoal">
+      ${f.q}
+      <svg class="chev h-4 w-4 shrink-0 text-charcoal/50 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <p class="mt-3 text-sm text-charcoal/70">${f.a}</p>
+  </details>`)));
+
+/* ---------- Navbar scroll behavior ---------- */
+const header = document.getElementById('navbar');
+const brand = document.getElementById('brand-text');
+const navLinkEls = document.querySelectorAll('.nav-link');
+
+function setScrolled(scrolled){
+  if(scrolled){
+    header.classList.remove('border-transparent','bg-transparent');
+    header.classList.add('border-b','border-charcoal/10','bg-sand-100/95');
+    header.style.backdropFilter = 'blur(8px)';
+    brand.classList.remove('text-sand-100'); brand.classList.add('text-olive-900');
+    navLinkEls.forEach(l => { l.classList.remove('text-sand-100/85','hover:text-sand-100'); l.classList.add('text-charcoal/70'); });
+  } else {
+    header.classList.add('border-transparent','bg-transparent');
+    header.classList.remove('border-b','border-charcoal/10','bg-sand-100/95');
+    header.style.backdropFilter = 'none';
+    brand.classList.add('text-sand-100'); brand.classList.remove('text-olive-900');
+    navLinkEls.forEach(l => { l.classList.add('text-sand-100/85','hover:text-sand-100'); l.classList.remove('text-charcoal/70'); });
+  }
+}
+window.addEventListener('scroll', () => setScrolled(window.scrollY > 10));
+setScrolled(window.scrollY > 10);
+
+lucide.createIcons();
+</script>
+</body>
+</html>
