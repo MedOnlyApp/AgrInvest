@@ -58,10 +58,10 @@
 <body class="bg-parchment-100 text-charcoal" style="background-color:var(--parchment-100);">
 
 <!-- Navbar -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-transparent bg-white">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-transparent bg-transparent">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
-    <a href="#" class="flex items-center gap-3">
-      <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <a href="/" class="flex items-center gap-3">
+      <!-- <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="60" y1="40" x2="60" y2="250" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
         <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
           <path d="M60 60 C 40 55, 30 40, 32 20"/>
@@ -71,20 +71,29 @@
           <path d="M60 140 C 40 136, 30 122, 32 104"/>
           <path d="M60 140 C 80 136, 90 122, 88 104"/>
         </g>
-      </svg>
-      <h3 id="brand-text" class="text-lg md:text-xl font-display transition-colors text-charcoal">AgrInvest</h3>
+      </svg> -->
+      <img src="../images/logo.png" alt="Logo AgrInvest" class="h-8 w-auto"/>
+      <h3 id="brand-text" class="text-lg md:text-xl font-display transition-colors text-sand-100">AgrInvest</h3>
     </a>
 
-    <div class="hidden items-center gap-6 text-sm text-black md:flex" id="nav-links">
-      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Impact Local</a>
-      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Comment ça marche</a>
-      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Projets</a>
-      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Pour les Agriculteurs</a>
+    <div class="hidden items-center gap-6 text-sm md:flex" id="nav-links">
+      <a href="#impact" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Impact Local</a>
+      <a href="/comment-ca-marche" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Comment ça marche</a>
+      <a href="#projects" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Projets</a>
+      <a href="#agriculteurs" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Pour les Agriculteurs</a>
     </div>
 
     <div class="flex items-center gap-4 text-sm">
-      <a href="#" class="nav-link transition-colors text-charcoal hover:text-charcoal/70">Se connecter</a>
-      <a href="#" class="rounded-full bg-terracotta-500 px-4 py-2 font-medium text-white hover:bg-terracotta-600 transition-colors">Investir dès 1 000 DH</a>
+      <div class="relative">
+        <button id="lang-btn" class="lang-btn rounded-full border px-3 py-1.5 transition-colors border-sand-100/30 text-sand-100/85 hover:border-sand-100/60">FR</button>
+        <ul id="lang-list" class="hidden absolute right-0 mt-1 w-20 overflow-hidden rounded-lg border border-charcoal/10 bg-white shadow-sm">
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">FR</button></li>
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">AR</button></li>
+          <li><button class="lang-opt block w-full px-3 py-2 text-left text-charcoal/80 hover:bg-sand-200">EN</button></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-link transition-colors text-sand-100/85 hover:text-sand-100">Se connecter</a>
+      <a href="#register" class="rounded-full bg-terracotta-500 px-4 py-2 font-medium text-white hover:bg-terracotta-600 transition-colors">Investir dès 1 000 DH</a>
     </div>
   </nav>
 </header>
