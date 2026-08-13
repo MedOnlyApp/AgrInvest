@@ -58,7 +58,7 @@
 <body class="bg-parchment-100 text-charcoal" style="background-color:var(--parchment-100);">
 
 <!-- Navbar -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b bg-parchment-100">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b border-charcoal bg-parchment-100">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
     <a href="/" class="flex items-center gap-3">
       <!-- <svg class="h-7 w-7 text-terracotta-500" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -411,21 +411,21 @@ const header = document.getElementById('navbar');
 const brand = document.getElementById('brand-text');
 const navLinkEls = document.querySelectorAll('.nav-link');
 
-function setScrolled(scrolled){
-  if(scrolled){
-    header.classList.remove('border-transparent','bg-transparent');
-    header.classList.add('border-b','border-charcoal/10','bg-sand-100/95');
-    header.style.backdropFilter = 'blur(8px)';
-    brand.classList.remove('text-sand-100'); brand.classList.add('text-olive-900');
-    navLinkEls.forEach(l => { l.classList.remove('text-sand-100/85','hover:text-sand-100'); l.classList.add('text-charcoal/70'); });
-  } else {
-    header.classList.add('border-transparent','bg-transparent');
-    header.classList.remove('border-b','border-charcoal/10','bg-sand-100/95');
-    header.style.backdropFilter = 'none';
-    brand.classList.add('text-sand-100'); brand.classList.remove('text-olive-900');
-    navLinkEls.forEach(l => { l.classList.add('text-sand-100/85','hover:text-sand-100'); l.classList.remove('text-charcoal/70'); });
-  }
-}
+// function setScrolled(scrolled){
+//   if(scrolled){
+//     header.classList.remove('border-transparent','bg-transparent');
+//     header.classList.add('border-b','border-charcoal/10','bg-sand-100/95');
+//     header.style.backdropFilter = 'blur(8px)';
+//     brand.classList.remove('text-sand-100'); brand.classList.add('text-olive-900');
+//     navLinkEls.forEach(l => { l.classList.remove('text-sand-100/85','hover:text-sand-100'); l.classList.add('text-charcoal/70'); });
+//   } else {
+//     header.classList.add('border-transparent','bg-transparent');
+//     header.classList.remove('border-b','border-charcoal/10','bg-sand-100/95');
+//     header.style.backdropFilter = 'none';
+//     brand.classList.add('text-sand-100'); brand.classList.remove('text-olive-900');
+//     navLinkEls.forEach(l => { l.classList.add('text-sand-100/85','hover:text-sand-100'); l.classList.remove('text-charcoal/70'); });
+//   }
+// }
 window.addEventListener('scroll', () => setScrolled(window.scrollY > 10));
 setScrolled(window.scrollY > 10);
 
